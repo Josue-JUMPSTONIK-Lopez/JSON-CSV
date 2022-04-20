@@ -13,26 +13,26 @@ function App() {
     inputText,
     outputText,
     rowsInput,
-    colsInput,
     rowsOutput,
-    colsOutput,
     isInputNotCorrect,
     incorrectInputMessage,
-    setInputText,
+    handleInputChange,
     tranformJSONToCSV,
     formatJSON,
     cleanTexts,
-    showExamples  } = useConverter();
+    showExamples,
+    auto_grow  } = useConverter();
 
   return (
     <Main>
       <Header/>
-      <TextArea 
-      cols={colsInput} 
-      rows={rowsInput}
-      onChange={(e) => setInputText(e.target.value)}
-      value={inputText}
-      />
+        <TextArea 
+        rows={rowsInput}
+        onChange={handleInputChange}
+        value={inputText}
+        onInput={auto_grow}
+        />
+
       {
         isInputNotCorrect 
         &&
@@ -45,11 +45,13 @@ function App() {
         <Button onClick={cleanTexts}>Clean</Button>
         <Button onClick={showExamples} >Show example</Button>
       </ButtonContainer>
-      <TextArea 
-      cols={colsOutput} 
-      rows={rowsOutput}
-      value={outputText}
-      />
+      
+        <TextArea  
+        rows={rowsOutput}
+        value={outputText}
+        onInput={auto_grow}
+        readOnly
+        />
     </Main>
   );
 }
